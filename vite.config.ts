@@ -3,14 +3,23 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Graphcoloring/', // Make sure this matches your repo name exactly
+  base: '/Graphcoloring/',
   server: {
     port: 3000,
     open: true
   },
   build: {
     outDir: 'dist',
-    sourcemap: false, // Disable sourcemaps for cleaner build
-    emptyOutDir: true // Clear dist folder before build
+    sourcemap: false,
+    emptyOutDir: true,
+    // Add these for better asset handling:
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js'
+      }
+    }
   }
 })
